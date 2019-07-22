@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.harada.springboot.udemy.domain.Categoria;
 import com.harada.springboot.udemy.services.CategoriaService;
 
-import javassist.tools.rmi.ObjectNotFoundException;
-
 @RestController
 @RequestMapping(value="/categorias")
 public class CategoriaResource {
@@ -26,7 +24,7 @@ public class CategoriaResource {
 		return service.buscar();
 	}
 	@RequestMapping(method=RequestMethod.GET, value="/{id}")
-	public ResponseEntity<?> listar(@PathVariable Integer id) throws ObjectNotFoundException {
+	public ResponseEntity<?> listar(@PathVariable Integer id) {
 		Categoria categoria = service.buscar(id);
 		return ResponseEntity.ok().body(categoria);
 	}
