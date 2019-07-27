@@ -30,4 +30,12 @@ public abstract class DefaultDomain implements Serializable {
 		return true;
 	}
 	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
+		return result;
+	}
+
 }

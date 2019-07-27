@@ -1,7 +1,7 @@
 package com.harada.springboot.udemy.domain;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -35,8 +35,9 @@ public class Pedido extends DefaultDomain {
 	@JoinColumn(name="idEnderecoEntrega")
 	private Endereco enderecoEntrega;
 	
-	@OneToMany(mappedBy = "pedido")
-	private List<ItemPedido> itens;
+	@OneToMany(mappedBy = "id.pedido")
+	private Set<ItemPedido> itens;
+	
 	public Pedido() {
 	}
 	
@@ -78,10 +79,10 @@ public class Pedido extends DefaultDomain {
 	public void setEnderecoEntrega(Endereco enderecoEntrega) {
 		this.enderecoEntrega = enderecoEntrega;
 	}
-	public List<ItemPedido> getItens() {
+	public Set<ItemPedido> getItens() {
 		return itens;
 	}
-	public void setItens(List<ItemPedido> itens) {
+	public void setItens(Set<ItemPedido> itens) {
 		this.itens = itens;
 	}
 }

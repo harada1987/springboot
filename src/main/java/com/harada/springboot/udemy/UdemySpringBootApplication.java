@@ -112,8 +112,8 @@ public class UdemySpringBootApplication implements CommandLineRunner {
 		ped1.setPagamento(pgto1);
 		ped2.setPagamento(pgto2);
 		
-		ItemPedido ip1 = new ItemPedido(null, 10.0, 3, 100.0,ped1,p1);
-		ItemPedido ip2 = new ItemPedido(null, 10.0, 3, 100.0,ped2,p2);
+		ItemPedido ip1 = new ItemPedido(ped1,p1,10.0, 3, 100.0);
+		ItemPedido ip2 = new ItemPedido(ped2,p2,10.0, 3, 100.0);
 		
 		categoriaRepo.saveAll(Arrays.asList(cat1,cat2));
 		produtoRepo.saveAll(Arrays.asList(p1,p2,p3));
