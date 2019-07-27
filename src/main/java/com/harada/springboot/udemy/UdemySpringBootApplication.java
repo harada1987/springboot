@@ -2,6 +2,8 @@ package com.harada.springboot.udemy;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
+import java.util.LinkedHashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -10,11 +12,25 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.harada.springboot.udemy.domain.Categoria;
 import com.harada.springboot.udemy.domain.Cidade;
+import com.harada.springboot.udemy.domain.Cliente;
+import com.harada.springboot.udemy.domain.Endereco;
 import com.harada.springboot.udemy.domain.Estado;
+import com.harada.springboot.udemy.domain.ItemPedido;
+import com.harada.springboot.udemy.domain.Pagamento;
+import com.harada.springboot.udemy.domain.PagamentoBoleto;
+import com.harada.springboot.udemy.domain.PagamentoCartao;
+import com.harada.springboot.udemy.domain.Pedido;
 import com.harada.springboot.udemy.domain.Produto;
+import com.harada.springboot.udemy.domain.enums.EstadoPagamento;
+import com.harada.springboot.udemy.domain.enums.TipoCliente;
 import com.harada.springboot.udemy.repositories.CategoriaRepository;
 import com.harada.springboot.udemy.repositories.CidadeRepository;
+import com.harada.springboot.udemy.repositories.ClienteRepository;
+import com.harada.springboot.udemy.repositories.EnderecoRepository;
 import com.harada.springboot.udemy.repositories.EstadoRepository;
+import com.harada.springboot.udemy.repositories.ItemPedidoRepository;
+import com.harada.springboot.udemy.repositories.PagamentoRepository;
+import com.harada.springboot.udemy.repositories.PedidoRepository;
 import com.harada.springboot.udemy.repositories.ProdutoRepository;
 
 @SpringBootApplication
@@ -32,6 +48,16 @@ public class UdemySpringBootApplication implements CommandLineRunner {
 	private CidadeRepository cidadeRepo;
 	@Autowired
 	private EstadoRepository estadoRepo;
+	@Autowired
+	private ClienteRepository clienteRepo;
+	@Autowired
+	private EnderecoRepository enderecoRepo;
+	@Autowired
+	private PagamentoRepository pagamentoRepo;
+	@Autowired
+	private PedidoRepository pedidoRepo;
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepo;
 	public void run(String... args) throws Exception{
 		Categoria cat1 = new Categoria(null,"Tipo manolo");
 		Categoria cat2 = new Categoria(null,"Tipo madame");
@@ -67,11 +93,38 @@ public class UdemySpringBootApplication implements CommandLineRunner {
 		e2.setCidades(new ArrayList<Cidade>());
 		e2.getCidades().addAll(Arrays.asList(c2,c4));
 		
+		Cliente cli1 = new Cliente(null, "Joao", "jao@teste", "00000000191", TipoCliente.PESSOAFISICA);
+		cli1.setTelefones(new LinkedHashSet<String>());
+		cli1.getTelefones().addAll(Arrays.asList("912341234","943214321"));
+		
+		Endereco end1 = new Endereco(null,"1","","Terceira divisão","01234-123",c1,cli1);
+		Endereco end2 = new Endereco(null,"1","","Rola cabocla","01424-123",c1,cli1);
+		
+		cli1.setEnderecos(new ArrayList<Endereco>());
+		cli1.getEnderecos().addAll(Arrays.asList(end1,end2));
+		
+		Pedido ped1 = new Pedido(null, new Date(), cli1, end1 );
+		Pedido ped2 = new Pedido(null, new Date(), cli1, end2 );
+		
+		Pagamento pgto1 = new PagamentoBoleto(ped1, EstadoPagamento.QUITADO, new Date(), new Date());
+		Pagamento pgto2 = new PagamentoCartao(ped2, EstadoPagamento.PENDENTE, 12);
+		
+		ped1.setPagamento(pgto1);
+		ped2.setPagamento(pgto2);
+		
+		ItemPedido ip1 = new ItemPedido(null, 10.0, 3, 100.0,ped1,p1);
+		ItemPedido ip2 = new ItemPedido(null, 10.0, 3, 100.0,ped2,p2);
+		
 		categoriaRepo.saveAll(Arrays.asList(cat1,cat2));
 		produtoRepo.saveAll(Arrays.asList(p1,p2,p3));
 		estadoRepo.saveAll(Arrays.asList(e1,e2));
 		cidadeRepo.saveAll(Arrays.asList(c1,c2,c3,c4));
-	
+		clienteRepo.saveAll(Arrays.asList(cli1));
+		enderecoRepo.saveAll(Arrays.asList(end1,end2));
+		
+		pedidoRepo.saveAll(Arrays.asList(ped1,ped2));
+		pagamentoRepo.saveAll(Arrays.asList(pgto1,pgto2));
+		itemPedidoRepo.saveAll(Arrays.asList(ip1,ip2));
 	}
 
 }
