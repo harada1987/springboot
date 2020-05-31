@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Endereco extends DefaultDomain  {
@@ -28,7 +28,7 @@ public class Endereco extends DefaultDomain  {
 	private Cidade cidade;
 	@ManyToOne
 	@JoinColumn(name="idCliente")
-	@JsonBackReference
+	@JsonIgnore
 	private Cliente cliente;
 	public Endereco() {	
 	}

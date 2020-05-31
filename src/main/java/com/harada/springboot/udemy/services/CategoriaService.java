@@ -22,4 +22,7 @@ public class CategoriaService {
 		Optional<Categoria> opt = repository.findById(id);
 		return opt.orElseThrow(() -> new ObjectNotFoundException("Categoria nao encontrada para id '"+id+"' "));
 	}
+	public Categoria salvar(Categoria categoria) {
+		return repository.save(categoria);
+	}
 }

@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Estado extends DefaultDomain {
@@ -21,7 +21,7 @@ public class Estado extends DefaultDomain {
 	private Integer id;
 	private String nome;
 	@OneToMany(mappedBy="estado")
-	@JsonBackReference
+	@JsonIgnore
 	private List<Cidade> cidades;
 	public Estado() {
 	}

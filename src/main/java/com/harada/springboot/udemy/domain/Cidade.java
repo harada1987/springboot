@@ -21,7 +21,7 @@ public class Cidade extends DefaultDomain {
 	private String nome;
 	@ManyToOne
 	@JoinColumn(name="idEstado")
-	@JsonManagedReference
+	
 	private Estado estado;
 	public Cidade() {
 	}

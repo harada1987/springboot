@@ -16,11 +16,11 @@ public class ItemPedidoPK implements Serializable {
 	private static final long serialVersionUID = 6705349750297584945L;
 	@ManyToOne
 	@JoinColumn(name="idPedido")
-	@JsonManagedReference
+	
 	private Pedido pedido;
 	@ManyToOne
 	@JoinColumn(name="idProduto")
-	@JsonManagedReference
+	
 	private Produto produto;
 	public Pedido getPedido() {
 		return pedido;

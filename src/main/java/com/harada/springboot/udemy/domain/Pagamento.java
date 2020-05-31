@@ -8,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.harada.springboot.udemy.domain.enums.EstadoPagamento;
 
 @Entity
@@ -24,6 +25,7 @@ public class Pagamento extends DefaultDomain {
 	@OneToOne
 	@JoinColumn(name="idPedido")
 	@MapsId
+	@JsonIgnore
 	private Pedido pedido;
 
 	public Pagamento() {

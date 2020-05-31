@@ -10,7 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Produto extends DefaultDomain {
@@ -26,7 +26,7 @@ public class Produto extends DefaultDomain {
 	private Double preco;
 	@ManyToMany
 	@JoinTable(name="PRODUTO_CATEGORIA", joinColumns=@JoinColumn(name="idProduto"), inverseJoinColumns = @JoinColumn(name="idCategoria"))
-	@JsonBackReference
+	@JsonIgnore
 	private List<Categoria> categorias;
 	
 	public Produto() {

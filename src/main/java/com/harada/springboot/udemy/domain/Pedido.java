@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Pedido extends DefaultDomain {
 	/**
@@ -29,6 +31,7 @@ public class Pedido extends DefaultDomain {
 	
 	@ManyToOne
 	@JoinColumn(name="idCliente")
+	@JsonIgnore
 	private Cliente cliente;
 	
 	@ManyToOne

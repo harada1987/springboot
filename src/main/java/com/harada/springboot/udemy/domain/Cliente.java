@@ -11,7 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.harada.springboot.udemy.domain.enums.TipoCliente;
 
 @Entity
@@ -20,6 +20,7 @@ public class Cliente extends DefaultDomain  {
 	 * 
 	 */
 	private static final long serialVersionUID = 4394328627559193521L;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
@@ -27,24 +28,30 @@ public class Cliente extends DefaultDomain  {
 	private String email;
 	private String cpfCnpj;
 	private Integer tipoCliente;
+	
+	@JsonIgnore
+	private String senha;
+	
 	@OneToMany(mappedBy="cliente")
-	@JsonManagedReference
 	private List<Endereco> enderecos;
+	
 	@ElementCollection
 	@CollectionTable(name="TELEFONE")
 	private Set<String> telefones;
+	
 	@OneToMany(mappedBy="cliente")
-	@JsonManagedReference
 	private List<Pedido> pedidos;
+	
 	public Cliente() {	
 	}
-	public Cliente(Integer id, String nome, String email, String cpfCnpj, TipoCliente tipoCliente) {
+	public Cliente(Integer id, String nome, String email, String cpfCnpj, TipoCliente tipoCliente,String senha) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.cpfCnpj = cpfCnpj;
 		this.tipoCliente = tipoCliente.getCodigo();
+		this.senha = senha;
 	}
 	public Integer getId() {
 		return id;
@@ -96,5 +103,11 @@ public class Cliente extends DefaultDomain  {
 	}
 	public void setTipoCliente(Integer tipoCliente) {
 		this.tipoCliente = tipoCliente;
+	}
+	public String getSenha() {
+		return senha;
+	}
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 }

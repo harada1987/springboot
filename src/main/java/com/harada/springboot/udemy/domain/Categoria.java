@@ -20,8 +20,9 @@ public class Categoria extends DefaultDomain {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
+
+
 	@ManyToMany(mappedBy="categorias")
-	@JsonManagedReference
 	private List<Produto> produtos;
 	public Categoria() {
 	}
