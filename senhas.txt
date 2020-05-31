@@ -1,0 +1,18 @@
+#GITHUB
+#	harada1987
+#	foxADM1975
+
+#RemoteMysql.com
+#	harada.gtalk@gmail.com
+#	raposa@1987
+
+#	url: jdbc:mysql://remotemysql.com:3306/EWeMR5gMWk
+#	user: EWeMR5gMWk
+#	pass: 6l3BmO6ZMQ
+
+
+
+
+# TESTE (vide application.properties)
+# localhost:80
+# localhost/h2-console
