@@ -45,4 +45,10 @@ public class CategoriaResource {
 		UriComponents uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(categoria.getId());
 		return ResponseEntity.created(uri.toUri()).build();
 	}
+	
+	@RequestMapping(method=RequestMethod.DELETE, value="/{id}")
+	public ResponseEntity<Void> excluir(@PathVariable Integer id) {
+		service.excluir(id);
+		return ResponseEntity.noContent().build();
+	} 
 }

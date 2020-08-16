@@ -19,11 +19,13 @@ public class Produto extends DefaultDomain {
 	 * 
 	 */
 	private static final long serialVersionUID = -3941942434046639159L;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	protected Integer id;
 	private String nome;
-	private Double preco;
+	private Double preco; 
+	
 	@ManyToMany
 	@JoinTable(name="PRODUTO_CATEGORIA", joinColumns=@JoinColumn(name="idProduto"), inverseJoinColumns = @JoinColumn(name="idCategoria"))
 	@JsonIgnore
